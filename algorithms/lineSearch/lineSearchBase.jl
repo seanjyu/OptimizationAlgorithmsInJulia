@@ -56,7 +56,7 @@ module lineSearchBaseModule
     function lineSearch(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSearchMethod; alpha = 1, tol = 1e-4, lim = 100, lineSearchLim = 100, printIter = false)
         """
         lineSearch
-        Implementation of generic line search
+            Implementation of generic line search
 
         Input:
             f (function) - Objective function 
