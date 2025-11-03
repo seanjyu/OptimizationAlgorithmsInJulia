@@ -5,6 +5,7 @@ module UnivariateForwardDifferenceModule
     
     """
     Module containing univariate forward difference algorithms
+    Currently only the 3 point central difference is implemented, in the future will implement more points
     """ 
 
     struct UnivariateForwardDifference <: GradientEstimator
@@ -28,6 +29,7 @@ module MultivariateForwardDifferenceModule
     
     """
     Module containing multivariate forward difference algorithms
+    Currently only the 3 point central difference is implemented (4 point for mixed partial derivatives), in the future will implement more points
     """
 
     struct MultivariateForwardDifference <: GradientEstimator
@@ -82,7 +84,7 @@ module MultivariateForwardDifferenceModule
             x_mm[j] -= est.h
             
             H[i,j] = (f(x_pp) - f(x_pm) - f(x_mp) + f(x_mm)) / (4 * est.h^2)
-            H[j,i] = H[i,j]  # Hessian is symmetric
+            H[j,i] = H[i,j]  
         end
     end
     
