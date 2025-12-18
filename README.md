@@ -1,6 +1,7 @@
 # Optimization Algorithms in Julia
 
-The following repo contains implementations of various optimization algorithms in Julia. I created this project to be better understand how these algortihms work and how they could be implemented in code. Therefore the implementations prioritized easier readability and extensibility but at the cost of verbosity and speed (see comparison tests [here]()). 
+The following repo contains implementations of various optimization algorithms in Julia. I created this project to be better understand how these algortihms work and how they could be implemented in code. Therefore the implementations prioritized easier readability and extensibility but at the cost of verbosity and speed.
+ <!-- (see comparison tests [here]()).  -->
 
 Many optimization algorithms follow a base pattern and have many variations using this pattern e.g. Nonlinear Conjugate Gradient (Fletcher-Reeves, Dai-Yuan) and Quasi-Newton methods (SR1, DFP). To facillitate this a struct representing the specific variation must be initialized and input to the base algorithm (see [example](#example-usage) below). 
 
