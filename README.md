@@ -10,8 +10,8 @@ Note some variations are too different from the base pattern despite belonging t
 For more production ready functionality please refer to other frameworks such as [Optim.jl](https://github.com/JuliaNLSolvers/Optim.jl) or [Jump.jl](https://github.com/jump-dev/JuMP.jl).
 
 ## Algorithms Implemented
-- [Gradient Descent](src\algorithms\GradientDescent.jl)
-- [Line Search Methods](src\algorithms\lineSearch)
+- [Gradient Descent](src/algorithms/GradientDescent.jl)
+- [Line Search Methods](src/algorithms/lineSearch)
     - Armijo Condition
     - Armijo Goldstein Conditions
     - Wolfe Condition
@@ -26,7 +26,9 @@ For more production ready functionality please refer to other frameworks such as
         - Limited BFGS (LBFGS)
 
 ## Example Usage
-The following is an example 
+The following is an example using the SR1, Quasi-Newton method.
+```
+```
 
 Note that utility functions/structs like `convergence` and `gradientEstimator` were also implemented. 
 ## Installation
