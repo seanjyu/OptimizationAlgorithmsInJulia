@@ -12,7 +12,7 @@ For more production ready functionality please refer to other frameworks such as
 ## Algorithms Implemented
 - [Gradient Descent](src/algorithms/GradientDescent.jl)
 - [Line Search Methods](src/algorithms/lineSearch)
-    - Armijo Condition
+    - [Armijo Condition](src/algorithms/lineSearch/ArmijoLineSearch.jl)
     - Armijo Goldstein Conditions
     - Wolfe Condition
     - More-Thuente line search
