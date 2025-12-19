@@ -3,7 +3,7 @@ include("../../src/OptAlgos.jl")
 using .OptAlgos
 
 """
-Armijo-Goldstein Line Search test
+More Thuente Line Search test
 """
 
 # test for univariate function
@@ -11,12 +11,10 @@ Armijo-Goldstein Line Search test
     f = UnivariateQuadraticFunction(1, 1, 100)
     c = ConvergenceCriteria()
     GradientEstimator = FiniteDifferenceUnivariate{5,:central}(1e-6)
-    stepLengthStrategy = QuadraticInterpolation()
-    armijoLineSearch = ArmijoGoldsteinLineSearch(c1 = 1e-4, stepLengthStrategy = stepLengthStrategy)
+    moreThuenteLineSearch = MoreThuenteLineSearch()
 
     for x0 in [-100.0, -10.0, 0.0, 10.0, 100.0]
-        # result = lineSearch(f, x0, GradientEstimator, wolfeLineSearch, c, alpha = 2, lim = 2000, lineSearchLim = 8000)
-        result = lineSearch(f, x0, GradientEstimator, armijoLineSearch, c, lim = 200, lineSearchLim = 500, printIter = true)
+        result = lineSearch(f, x0, GradientEstimator, moreThuenteLineSearch, c, lim = 200, lineSearchLim = 500, printIter = true)
         @test isapprox(result.minimum, -0.5, atol=1e-4) # test for minimum point x coordinate
         @test isapprox(result.finalValue, 99.75, atol=1e-4) # test for minimum point y coordinate
     end
@@ -29,10 +27,9 @@ end;
     f = MultivariateQuadraticFunction(A, 2.0)
     c = ConvergenceCriteria()
     GradientEstimator = FiniteDifferenceMultivariate{5,:central}(3e-6)
-    stepLengthStrategy = QuadraticInterpolation()
-    armijoLineSearch = ArmijoGoldsteinLineSearch(c1 = 1e-4, stepLengthStrategy = stepLengthStrategy)
+    moreThuenteLineSearch = MoreThuenteLineSearch()
     for x0 in [[-10.0, 0.0], [-10.0, 2.0], [0.0, -10.0], [10.0, 1.0], [10.0, 5.0]]
-        result = lineSearch(f, x0, GradientEstimator, armijoLineSearch, c,  alpha = 2, lim = 500, lineSearchLim = 200)
+        result = lineSearch(f, x0, GradientEstimator, moreThuenteLineSearch, c,  alpha = 2, lim = 500, lineSearchLim = 200)
         @test isapprox(result.minimum, [0, 0], atol=1e-4) # test for minimum point x coordinate
         @test isapprox(result.finalValue, 2.0, atol=1e-4) # test for minimum point y coordinate
     end
@@ -40,7 +37,7 @@ end;
     # 3D
     A3 = [2.0 0.0 0.0; 0.0 2.0 0.0; 0.0 0.0 2.0]
     f3 = MultivariateQuadraticFunction(A3)
-    result3 = lineSearch(f3, [1.0, 1.0, 1.0], GradientEstimator, armijoLineSearch, c) # test for minimum point x coordinate
+    result3 = lineSearch(f3, [1.0, 1.0, 1.0], GradientEstimator, moreThuenteLineSearch, c) # test for minimum point x coordinate
     @test isapprox(result3.minimum, [0.0, 0.0, 0.0], atol=1e-3) # test for minimum point y coordinate
 end;
 

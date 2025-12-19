@@ -3,7 +3,7 @@ include("../../src/OptAlgos.jl")
 using .OptAlgos
 
 """
-Armijo-Goldstein Line Search test
+Armijo Line Search test
 """
 
 # test for univariate function
@@ -12,7 +12,7 @@ Armijo-Goldstein Line Search test
     c = ConvergenceCriteria()
     GradientEstimator = FiniteDifferenceUnivariate{5,:central}(1e-6)
     stepLengthStrategy = QuadraticInterpolation()
-    armijoLineSearch = ArmijoGoldsteinLineSearch(c1 = 1e-4, stepLengthStrategy = stepLengthStrategy)
+    armijoLineSearch = ArmijoLineSearch(c1 = 1e-4, stepLengthStrategy = stepLengthStrategy)
 
     for x0 in [-100.0, -10.0, 0.0, 10.0, 100.0]
         # result = lineSearch(f, x0, GradientEstimator, wolfeLineSearch, c, alpha = 2, lim = 2000, lineSearchLim = 8000)
@@ -30,7 +30,7 @@ end;
     c = ConvergenceCriteria()
     GradientEstimator = FiniteDifferenceMultivariate{5,:central}(3e-6)
     stepLengthStrategy = QuadraticInterpolation()
-    armijoLineSearch = ArmijoGoldsteinLineSearch(c1 = 1e-4, stepLengthStrategy = stepLengthStrategy)
+    armijoLineSearch = ArmijoLineSearch(c1 = 1e-4, stepLengthStrategy = stepLengthStrategy)
     for x0 in [[-10.0, 0.0], [-10.0, 2.0], [0.0, -10.0], [10.0, 1.0], [10.0, 5.0]]
         result = lineSearch(f, x0, GradientEstimator, armijoLineSearch, c,  alpha = 2, lim = 500, lineSearchLim = 200)
         @test isapprox(result.minimum, [0, 0], atol=1e-4) # test for minimum point x coordinate
