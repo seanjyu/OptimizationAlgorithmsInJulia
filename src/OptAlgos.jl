@@ -30,6 +30,7 @@ export ConvergenceCriteria, CheckConvergence
 
 # Logger
 export NoLogger, Logger, NoAlgorithmData, AlgorithmData, initLogger, logIter!, finalizeLogger!, setConvergenceReason!
+
 # Test Functions
 export  UnivariateQuadraticFunction, discriminant, roots,
         MultivariateQuadraticFunction, eigenvalues, 
@@ -149,7 +150,7 @@ include("algorithms/conjugateGradient/PolakRibiere.jl")
 
 # Adaptive Stochastic Algorithms
 include("algorithms/adaptiveStochastic/SGD.jl")
-include("algorithms/adaptiveStochastic/VanillaSGD.jl")
+include("algorithms/adaptiveStochastic/BasicSGD.jl")
 include("algorithms/adaptiveStochastic/Adadelta.jl")
 include("algorithms/adaptiveStochastic/Adagrad.jl")
 include("algorithms/adaptiveStochastic/Adam.jl")
