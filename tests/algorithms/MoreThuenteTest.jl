@@ -15,7 +15,7 @@ More Thuente Line Search test
 
     for x0 in [-100.0, -10.0, 0.0, 10.0, 100.0]
         result = lineSearch(f, x0, GradientEstimator, moreThuenteLineSearch, c, lim = 200, lineSearchLim = 500, printIter = true)
-        @test isapprox(result.minimum, -0.5, atol=1e-4) # test for minimum point x coordinate
+        @test isapprox(result.minimumPoint, -0.5, atol=1e-4) # test for minimum point x coordinate
         @test isapprox(result.finalValue, 99.75, atol=1e-4) # test for minimum point y coordinate
     end
 end;
@@ -30,7 +30,7 @@ end;
     moreThuenteLineSearch = MoreThuenteLineSearch()
     for x0 in [[-10.0, 0.0], [-10.0, 2.0], [0.0, -10.0], [10.0, 1.0], [10.0, 5.0]]
         result = lineSearch(f, x0, GradientEstimator, moreThuenteLineSearch, c,  alpha = 2, lim = 500, lineSearchLim = 200)
-        @test isapprox(result.minimum, [0, 0], atol=1e-4) # test for minimum point x coordinate
+        @test isapprox(result.minimumPoint, [0, 0], atol=1e-4) # test for minimum point x coordinate
         @test isapprox(result.finalValue, 2.0, atol=1e-4) # test for minimum point y coordinate
     end
 
@@ -38,6 +38,6 @@ end;
     A3 = [2.0 0.0 0.0; 0.0 2.0 0.0; 0.0 0.0 2.0]
     f3 = MultivariateQuadraticFunction(A3)
     result3 = lineSearch(f3, [1.0, 1.0, 1.0], GradientEstimator, moreThuenteLineSearch, c) # test for minimum point x coordinate
-    @test isapprox(result3.minimum, [0.0, 0.0, 0.0], atol=1e-3) # test for minimum point y coordinate
+    @test isapprox(result3.minimumPoint, [0.0, 0.0, 0.0], atol=1e-3) # test for minimum point y coordinate
 end;
 
