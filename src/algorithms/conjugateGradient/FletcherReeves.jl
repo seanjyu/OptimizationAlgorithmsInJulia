@@ -1,10 +1,3 @@
-# module FletcherReevesModule
-#     using ..GradientEstimatorInterface: GradientEstimator, gradient, hessian
-#     using ..NonlinearCGInterface: NonlinearCGMethod
-#     import ..NonlinearCGInterface: calculateBeta
-#     using LinearAlgebra
-#     export FletcherReeves
-
 """
 Fletcher-Reeves Nonlinear Conjugate Gradient Method
 

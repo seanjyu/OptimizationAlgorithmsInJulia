@@ -34,7 +34,6 @@ function LBFGS(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSe
     s_history = []
     y_history = []
 
-    # n = length(x0)
     gradRes = gradient(gradEstimator, f, x0)
     grad = gradRes.grad
 
