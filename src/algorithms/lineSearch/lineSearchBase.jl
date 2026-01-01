@@ -90,7 +90,7 @@ function lineSearch(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::L
                 println("Line search converged in $i iterations.")
             end
             return (
-                minimum = x,
+                minimumPoint = x,
                 finalValue = fCur,
                 logger = logger
             )
