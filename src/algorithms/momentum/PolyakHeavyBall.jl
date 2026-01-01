@@ -30,7 +30,7 @@ function PolyakHeavyBall(f, x0, gradEstimator::GradientEstimator, criteria::Conv
 
         logIter!(logger, fCur, x, grad, 1 + gradRes.funcEvals, gradRes.funcEvals, 1, momentums = momentum)
 
-        converged, reason = CheckConvergence(criteria, grad, x, xOld, fCur, fOld, 0)
+        converged, reason = CheckConvergence(criteria, grad, x, xOld, fCur, fOld, i)
         if converged 
             setConvergenceReason!(logger, reason)
             break
@@ -38,7 +38,7 @@ function PolyakHeavyBall(f, x0, gradEstimator::GradientEstimator, criteria::Conv
     end
     finalizeLogger!(logger)
     return (
-            minimum = x,
+            minimumPoint = x,
             finalValue = fCur,
             logger = logger
         )

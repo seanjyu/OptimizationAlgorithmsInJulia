@@ -14,8 +14,6 @@ function NesterovAcceleratedGradient(f, x0, gradEstimator::GradientEstimator, cr
     logger = initLogger(track, x0, fCur, lim, algorithmData = algorithmData)
 
     for i in 1:lim
-        # gradRes = gradient(gradEstimator, f, x)
-        # grad = gradRes.grad
 
         xOld = copy(x)
         fOld = fCur
@@ -31,7 +29,7 @@ function NesterovAcceleratedGradient(f, x0, gradEstimator::GradientEstimator, cr
 
         logIter!(logger, fCur, x, lookAheadGrad, 1 + lookAheadRes.funcEvals, lookAheadRes.funcEvals, 1, momentums = momentum)
 
-        converged, reason = CheckConvergence(criteria, grad, x, xOld, fCur, fOld, 0)
+        converged, reason = CheckConvergence(criteria, grad, x, xOld, fCur, fOld, i)
         if converged 
             setConvergenceReason!(logger, reason)
             break
