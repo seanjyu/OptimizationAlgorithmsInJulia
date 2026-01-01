@@ -42,7 +42,7 @@ function SGD(f, x0, gradEstimator::GradientEstimator, rule::AdaptiveMethod;
     finalizeLogger!(logger)
     
     return (
-        minimum = x,
+        minimumPoint = x,
         finalValue = fFinal,
         logger = logger
     )

@@ -29,7 +29,7 @@ module TrustRegionBaseModule
                     println("Trust Region method converged in $i iterations. Final gradient norm: $(norm(grad))")
                 end
                 return (
-                    minimum = x,
+                    minimumPoint = x,
                     path = path,
                     gradients = gradients,
                     hessians = hessians,
@@ -69,7 +69,7 @@ module TrustRegionBaseModule
         end
         @warn "Trust Region Method maximum iteration reached"
         return (
-            minimum = x,
+            minimumPoint = x,
             path = path,
             gradients = gradients,
             hessians = hessians,

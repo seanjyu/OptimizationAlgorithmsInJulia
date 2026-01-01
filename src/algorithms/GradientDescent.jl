@@ -31,7 +31,7 @@ function GradientDescent(f, x0, gradEstimator::GradientEstimator, criteria::Conv
     end
     finalizeLogger!(logger)
     return (
-            minimum = x,
+            minimumPoint = x,
             finalValue = fCur,
             logger = logger
         )

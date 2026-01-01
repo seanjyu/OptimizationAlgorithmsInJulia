@@ -1,6 +1,3 @@
-
-
-
 function ProjectedGradientDescent(f, x0, gradEstimator::GradientEstimator, constraints::Constraint, criteria::ConvergenceCriteria; alpha=0.1, tol=1e-5, lim=100, track = true)
     x = x0
     fCur = f(x0)
@@ -34,16 +31,9 @@ function ProjectedGradientDescent(f, x0, gradEstimator::GradientEstimator, const
 
         # if norm(grad) < tol; break; end
     end
-    # return (
-    #         minimum = x,
-    #         path = path,
-    #         gradients = gradients,
-    #         functionValues = functionValues,
-    #         iterations = length(path) - 1
-        # )
     finalizeLogger!(logger)
     return (
-            minimum = x,
+            minimumPoint = x,
             finalValue = fCur,
             logger = logger
         )
