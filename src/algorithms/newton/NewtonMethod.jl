@@ -72,7 +72,7 @@ function NewtonMethod(f, x0, gradEstimator::GradientEstimator, criteria::Converg
 
     finalizeLogger!(logger)
         return (
-            minimum = x,
+            minimumPoint = x,
             finalValue = fCur,
             logger = logger
         )
