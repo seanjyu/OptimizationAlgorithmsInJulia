@@ -21,7 +21,7 @@ function LBFGS(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSe
         printIter (Bool) - Print number of iterations after Quasi-Newton method converges
 
     Output - named tuple with the following fields
-        minimum (Vector) - Final coordinate 
+        minimumPoint (Vector) - Final coordinate 
         path (Array) - Coordinates at each iteration 
         gradients (Array) - Gradient values at each iteration
         directions (Array) - Direction vectors at each iteration
@@ -31,10 +31,6 @@ function LBFGS(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSe
     
     x = copy(x0)
     fCur = f(x0)
-    # path = [copy(x0)]
-    # gradients = []
-    # directions = []  
-    # functionValues = [f(x0)]
     s_history = []
     y_history = []
 
@@ -42,9 +38,6 @@ function LBFGS(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSe
     gradRes = gradient(gradEstimator, f, x0)
     grad = gradRes.grad
 
-    # push!(gradients, copy(grad))
-    # push!(directions, copy(-grad))  # for first step use negative gradient
-    
     algorithmData = track ? 
         AlgorithmData(lim; directions=Vector{Float64}) : 
         NoAlgorithmData()
@@ -116,10 +109,6 @@ function LBFGS(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSe
                 stepSearchRes.gradEvals + 1,  # grad evals
                 directions=direction)
 
-        
-        # # Store for next iteration
-        # push!(directions, copy(direction))
-        # push!(gradients, copy(gradNew))
 
         # Update for next iteration (BEFORE convergence check!)
         grad = gradNew
@@ -134,9 +123,6 @@ function LBFGS(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSe
         end
         
     end
-    
-    # # if maximum iterations reached throw error
-    # error("LBFGS Method failed: maximum iterations ($lim) reached")
 
     if logger.iterations[] == lim && isempty(logger.convergenceReason[])
         setConvergenceReason!(logger, "Maximum iterations reached")
@@ -153,7 +139,7 @@ function LBFGS(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSe
     end
     
     return (
-        minimum = x,
+        minimumPoint = x,
         finalValue = fCur,
         logger = logger
     )
