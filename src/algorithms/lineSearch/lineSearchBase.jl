@@ -56,7 +56,7 @@ function lineSearch(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::L
         lim (Int) - Maximum number of iterations
 
     Output - named tuple with the following fields
-        minimum (Vector)- Final coordinate 
+        minimumPoint (Vector)- Final coordinate 
         path (Array) - Coordinates at each iteration 
         gradients (Array) - Gradient values at each iteration
         functionValues (Array) - Objective function values at each iteration
