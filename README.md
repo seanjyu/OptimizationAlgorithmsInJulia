@@ -13,7 +13,8 @@ For more production ready functionality please refer to other frameworks such as
 <!-- [Gradient Descent](src/algorithms/GradientDescent.jl) -->
 ### Unconstrained Optimization 
 <summary><a href="src/algorithms/GradientDescent.jl">Gradient Descent</a></summary>
-<details>
+<!-- <details> -->
+
 <summary><a href="src/algorithms/lineSearch">Line Search Methods</a></summary>
     <ul>
         <li><a href="src/algorithms/lineSearch/ArmijoLineSearch.jl"> Armijo Condition</a></li>
