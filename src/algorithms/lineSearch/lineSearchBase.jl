@@ -1,5 +1,5 @@
 """
-Interface Module for Line Search methods
+Interface type for Line Search methods
     Type: 
         LineSearchMethod - In concrete implementation assign type to struct and store hyperparameters
         
@@ -41,7 +41,15 @@ function stepSearch(lineSearchMethod::LineSearchMethod,
 end
 
 
-function lineSearch(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::LineSearchMethod, criteria::ConvergenceCriteria; alpha = 1, lim = 100, lineSearchLim = 100, printIter = false, track = true)
+function lineSearch(f, 
+                    x0, gradEstimator::GradientEstimator, 
+                    lineSearchMethod::LineSearchMethod, 
+                    criteria::ConvergenceCriteria; 
+                    alpha = 1, 
+                    lim = 100, 
+                    lineSearchLim = 100, 
+                    printIter = false, 
+                    track = true)
     """
     lineSearch
         Implementation of generic line search
@@ -50,7 +58,8 @@ function lineSearch(f, x0, gradEstimator::GradientEstimator, lineSearchMethod::L
         f (function) - Objective function 
         x0 (vector) - Starting coordinate 
         gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details
-        lineSearchMethod (LineSearchMethod)- LineSearchMethod struct impementing lineSearchInterface with a specific step length algorithm 
+        lineSearchMethod (LineSearchMethod) - LineSearchMethod struct impementing lineSearchInterface with a specific step length algorithm
+        criteria (ConvergenceCriteria) -  
         alpha (Float64) - Initial step length
         tol (Float64) - Stop criteria, if norm grad smaller than tolerance value iterations will stop
         lim (Int) - Maximum number of iterations

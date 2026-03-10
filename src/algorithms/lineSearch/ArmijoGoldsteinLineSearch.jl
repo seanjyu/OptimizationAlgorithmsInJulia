@@ -20,7 +20,12 @@ struct ArmijoGoldsteinLineSearch <: LineSearchMethod
     directionTol::Float64
 
     # default constructor
-    ArmijoGoldsteinLineSearch(;c1 = 1e-4, stepLengthStrategy = Backtracking(rho=0.5), printLineSearchCount = false, directionTol = 1e-6) = new(c1, stepLengthStrategy, printLineSearchCount, directionTol)
+    ArmijoGoldsteinLineSearch(;c1 = 1e-4, 
+                                stepLengthStrategy = Backtracking(rho=0.5), 
+                                printLineSearchCount = false, directionTol = 1e-6) = new(c1, 
+                                                                                        stepLengthStrategy, 
+                                                                                        printLineSearchCount, 
+                                                                                        directionTol)
 end
 
 """
@@ -73,8 +78,6 @@ function stepSearch(parameters::ArmijoGoldsteinLineSearch,
     end
     
     while lineSearchIterCount < lineSearchLim
-        # xPropose = xCur .+ alphaCur .* grad
-        # fPropose = f(xPropose)
         if xCur isa AbstractArray
         # Vector case
             @. xPropose = xCur + alphaCur * direction
@@ -89,8 +92,12 @@ function stepSearch(parameters::ArmijoGoldsteinLineSearch,
         goldsteinCondition = fPropose >= fCur + (1 - parameters.c1) * alphaCur * dirDerivative
 
         if armijoCondition && goldsteinCondition
-            # return (x.New = xPropose, fFinal = fPropose, alphaFinal = alphaCur)
-            return (xNew = xPropose, fFinal = fPropose, alphaFinal = alphaCur, funcEvals = funcEvals, gradEvals = 0, lineSearchIterCount = lineSearchIterCount)
+            return (xNew = xPropose, 
+                    fFinal = fPropose, 
+                    alphaFinal = alphaCur, 
+                    funcEvals = funcEvals, 
+                    gradEvals = 0, 
+                    lineSearchIterCount = lineSearchIterCount)
         else
             alphaSearchResult = calculateStepLength(parameters.stepLengthStrategy,
                                                 f,

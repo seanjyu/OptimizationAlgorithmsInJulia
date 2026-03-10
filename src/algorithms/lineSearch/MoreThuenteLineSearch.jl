@@ -32,7 +32,27 @@ struct MoreThuenteLineSearch <: LineSearchMethod
     directionTol::Float64
 
     # default constructor
-    MoreThuenteLineSearch(;c1 = 1e-4, c2 = 0.1, stepMin = 1e-10, stepMax = 1e5, xtrapf = 4, widthTol = 1e-5, bisectionThreshold = 0.66, bracketBoundFactor = 0.66, printLineSearchCount = false, curvTol = 1e-8, directionTol = 1e-6) = new(c1, c2, stepMin, stepMax, xtrapf, widthTol, bisectionThreshold, bracketBoundFactor, printLineSearchCount, curvTol, directionTol)
+    MoreThuenteLineSearch(;c1 = 1e-4, 
+                           c2 = 0.1, 
+                           stepMin = 1e-10, 
+                           stepMax = 1e5, 
+                           xtrapf = 4, 
+                           widthTol = 1e-5, 
+                           bisectionThreshold = 0.66, 
+                           bracketBoundFactor = 0.66, 
+                           printLineSearchCount = false, 
+                           curvTol = 1e-8, 
+                           directionTol = 1e-6) = new(c1, 
+                                                      c2, 
+                                                      stepMin, 
+                                                      stepMax, 
+                                                      xtrapf, 
+                                                      widthTol, 
+                                                      bisectionThreshold, 
+                                                      bracketBoundFactor, 
+                                                      printLineSearchCount, 
+                                                      curvTol, 
+                                                      directionTol)
 end 
 
 """
@@ -224,7 +244,19 @@ function stepSearch(parameters::MoreThuenteLineSearch,
     error("MoreThuente linesearch failed: maximum iterations ($lineSearchLim) reached")
 end
 
-function updateMoreThuenteBracket(parameters::MoreThuenteLineSearch, alphaBest, fBest, gradBest, alphaOther, fOther, gradOther, alphaCur, fTrial, gradTrial, bracketed, alphaMin, alphaMax)
+function updateMoreThuenteBracket(parameters::MoreThuenteLineSearch, 
+                                  alphaBest, 
+                                  fBest, 
+                                  gradBest, 
+                                  alphaOther, 
+                                  fOther, 
+                                  gradOther, 
+                                  alphaCur, 
+                                  fTrial, 
+                                  gradTrial, 
+                                  bracketed, 
+                                  alphaMin, 
+                                  alphaMax)
     # check sign for derivative
     derivativeSign = gradTrial * (gradBest / abs(gradBest)) 
 

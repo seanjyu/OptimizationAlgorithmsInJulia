@@ -20,7 +20,12 @@ struct ArmijoLineSearch <: LineSearchMethod
     directionTol::Float64
 
     # default constructor
-    ArmijoLineSearch(;c1 = 1e-4, stepLengthStrategy = Backtracking(rho=0.5), printLineSearchCount = false, directionTol = 1e-6) = new(c1, stepLengthStrategy, printLineSearchCount, directionTol)
+    ArmijoLineSearch(;c1 = 1e-4, 
+                    stepLengthStrategy = Backtracking(rho=0.5), 
+                    printLineSearchCount = false, directionTol = 1e-6) = new(c1, 
+                                                                            stepLengthStrategy, 
+                                                                            printLineSearchCount, 
+                                                                            directionTol)
 end
 
 """
@@ -82,16 +87,18 @@ function stepSearch(parameters::ArmijoLineSearch,
             xPropose = xCur + alphaCur * direction
         end
         fPropose = f(xPropose)
-        # gradPropose = gradProposeRes.grad
-        # gradEvals += 1
-        # dirDerivativePropose = dot(gradPropose, direction)
         funcEvals += 1
 
         armijoCondition = fPropose <= fCur + parameters.c1 * alphaCur * dirDerivative
 
         #TODO need to rethink the dirDerivativePropose in the calculateStepLength
         if armijoCondition
-            return (xNew = xPropose, fFinal = fPropose, alphaFinal = alphaCur, funcEvals = funcEvals, gradEvals = 0, lineSearchIterCount = lineSearchIterCount)
+            return (xNew = xPropose, 
+            fFinal = fPropose, 
+            alphaFinal = alphaCur, 
+            funcEvals = funcEvals, 
+            gradEvals = 0, 
+            lineSearchIterCount = lineSearchIterCount)
         else
             alphaSearchResult = calculateStepLength(parameters.stepLengthStrategy,
                                                     f,

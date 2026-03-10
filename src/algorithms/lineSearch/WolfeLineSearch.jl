@@ -25,7 +25,17 @@ Hyperparameters
         directionTol::Float64
 
         # default constructor
-        WolfeLineSearch(;c1 = 1e-4, c2 = 0.1, stepLengthStrategy = Backtracking(rho=0.5), strong = false, printLineSearchCount = false, curvTol = 1e-8, directionTol = 1e-6) = new(c1, c2, stepLengthStrategy, strong, printLineSearchCount, curvTol, directionTol)
+        WolfeLineSearch(;c1 = 1e-4, 
+                        c2 = 0.1, 
+                        stepLengthStrategy = Backtracking(rho=0.5), 
+                        strong = false, 
+                        printLineSearchCount = false, curvTol = 1e-8, directionTol = 1e-6) = new(c1, 
+                                                                                                 c2, 
+                                                                                                 stepLengthStrategy, 
+                                                                                                 strong, 
+                                                                                                 printLineSearchCount, 
+                                                                                                 curvTol, 
+                                                                                                 directionTol)
     end 
 
     """
@@ -105,7 +115,12 @@ Hyperparameters
                 if parameters.printLineSearchCount
                     println("Line search converged in $lineSearchIterCount iterations")
                 end
-                return (xNew = copy(xPropose), fFinal = fPropose, alphaFinal = alphaCur, funcEvals = funcEvals, gradEvals = gradEvals, lineSearchIterCount = lineSearchIterCount)
+                return (xNew = copy(xPropose), 
+                fFinal = fPropose, 
+                alphaFinal = alphaCur, 
+                funcEvals = funcEvals, 
+                gradEvals = gradEvals, 
+                lineSearchIterCount = lineSearchIterCount)
             else
                 alphaSearchResult = calculateStepLength(parameters.stepLengthStrategy,
                                                         f,
