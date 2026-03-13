@@ -23,13 +23,12 @@ function ProjectedGradientDescent(f, x0, gradEstimator::GradientEstimator, const
         #TODO add stepsize to logIter
         # logIter!(logger, fCur, x, grad, x,  1 + gradRes.funcEvals, gradRes.funcEvals, 1)
 
-        converged, reason = CheckConvergence(criteria, grad, x, xOld, fCur, fOld, 0)
+        converged, reason = CheckConvergence(criteria, grad, x, xOld, fCur, fOld, i)
         if converged 
             setConvergenceReason!(logger, reason)
             break
         end
 
-        # if norm(grad) < tol; break; end
     end
     finalizeLogger!(logger)
     return (
