@@ -1,9 +1,16 @@
 function DualAscent(f, x0, unconstrainedOptSolver::UnconstrainedOptMethod,
-                    A::Matrix, b::Vector, criteria::ConvergenceCriteria;
+                    constraints::Constraint, criteria::ConvergenceCriteria;
                     alpha=0.1, lim=100, track=false)
+
+    if isa(constraints, CompositeConstraint)
+        any(isInequality(c) for c in constraints.constraints) &&
+            error("DualAscent only supports equality constraints")
+    elseif isInequality(constraints)
+        error("DualAscent only supports equality constraints")
+    end
     
     x = x0
-    lambda = zeros(length(b))  # dual variables
+    lambda = zeros(constraintDimension(constraints))
     fCur = f(x0)
 
     algorithmData = track ? 
@@ -11,16 +18,17 @@ function DualAscent(f, x0, unconstrainedOptSolver::UnconstrainedOptMethod,
         NoAlgorithmData()
     logger = initLogger(track, x0, fCur, lim; algorithmData=algorithmData)
 
+    # TODO implement early stopping?
     for i in 1:lim
         # x-minimization: min_x L(x, lambda) = f(x) + dot(lambda, (Ax - b))
-        lagrangian(y) = f(y) + dot(lambda, A * y - b)
+        lagrangian(y) = f(y) + dot(lambda, residual(constraints, y))
         
         unconstrainedRes = solveUnconstrainedOpt(lagrangian, x, unconstrainedOptSolver)
-        xNew = unconstrainedRes.minimum
+        xNew = unconstrainedRes.minimumPoint
         fNew = f(xNew)
         
         # Dual update: gradient ascent on dual function
-        primalResidual = A * xNew - b
+        primalResidual = residual(constraints, xNew)
         lambdaNew = lambda + alpha * primalResidual
 
         logIter!(logger, fNew, xNew, zeros(length(x)), 0.0, 0, 0, 0;
