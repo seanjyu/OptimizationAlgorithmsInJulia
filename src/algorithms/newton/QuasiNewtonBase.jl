@@ -132,7 +132,7 @@ function QuasiNewtonOpt(f, x0, gradEstimator::GradientEstimator, quasiNewtonMeth
         finalizeLogger!(logger)
         
         return (
-            mininumPoint = x,
+            minimumPoint = x,
             finalValue = fCur,
             logger = logger
         )

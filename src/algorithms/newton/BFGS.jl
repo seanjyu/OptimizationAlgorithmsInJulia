@@ -41,7 +41,11 @@ Output - Matrix with updated approximation
 """
 
 # Inverse hessian approximation
-function updateApproximation(parameters::BFGSH, H, s, y)
+function updateApproximation(parameters::BFGSH, 
+                             H, 
+                             s, 
+                             y)
+                             
     curvature = dot(y, s)
 
     # Check curvature condition

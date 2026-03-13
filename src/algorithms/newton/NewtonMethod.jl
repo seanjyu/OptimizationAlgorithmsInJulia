@@ -1,5 +1,5 @@
 """
-Newton Method Module
+Newton Method
     Implementation of Newton step optimization method. In this implementation the Hessian is solved using Julia's built in matrix inverse function.
 
 Reference(s)
@@ -10,8 +10,9 @@ Input:
     f (function) - Objective function 
     x0 (vector) - Starting coordinate 
     gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details
-    tol (Float64) - Stop criteria, if norm grad smaller than tolerance value iterations will stop
+    
     lim (Int) - Maximum number of iterations
+    track (boolean) - 
 
 Output - named tuple with the following fields
     minimum (Vector)- Final coordinate 
@@ -21,7 +22,12 @@ Output - named tuple with the following fields
     functionValues (Array) - Objective function values at each iteration
     iterations (Int) - Bumber of iterations 
 """
-function NewtonMethod(f, x0, gradEstimator::GradientEstimator, criteria::ConvergenceCriteria, lim = 100, track = true)
+function NewtonMethod(f, 
+                      x0, 
+                      gradEstimator::GradientEstimator, 
+                      criteria::ConvergenceCriteria, 
+                      lim = 100, 
+                      track = true)
 
     x = copy(x0)
     fCur = f(x0)
