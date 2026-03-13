@@ -3,7 +3,7 @@ Resource:
 Dive into Deep learning - https://d2l.ai/chapter_optimization/rmsprop.html
 ```
 
-struct RMSprop <: AdaptiveMethod
+struct RMSprop <: AdaptiveStochasticMethod
     eta::Float64   # learning rate
     gamma::Float64   # decay rate
     epsilon::Float64   # numerical stability

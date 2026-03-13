@@ -1,4 +1,4 @@
-struct BasicSGD <: AdaptiveMethod
+struct BasicSGD <: AdaptiveStochasticMethod
     eta::Float64  # learning rate
 end
 

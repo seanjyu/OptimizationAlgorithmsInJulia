@@ -3,7 +3,7 @@ Resource
 Dive into deep learning - https://d2l.ai/chapter_optimization/adadelta.html
 ```
 
-struct Adadelta <: AdaptiveMethod
+struct Adadelta <: AdaptiveStochasticMethod
     rho::Float64   
     epsilon::Float64   # numerical stability
 end

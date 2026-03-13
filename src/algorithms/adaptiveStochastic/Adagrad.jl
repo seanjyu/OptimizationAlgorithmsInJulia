@@ -3,8 +3,7 @@ Resource
 Dive into Deep Learning - https://d2l.ai/chapter_optimization/adagrad.html
 ```
 
-
-struct Adagrad <: AdaptiveMethod
+struct Adagrad <: AdaptiveStochasticMethod
     eta::Float64   # learning rate
     epsilon::Float64   # numerical stability
 end

@@ -3,7 +3,7 @@ Resource
 Dive into Deep Learning - https://d2l.ai/chapter_optimization/adam.html
 ```
 
-struct Adam <: AdaptiveMethod
+struct Adam <: AdaptiveStochasticMethod
     eta::Float64   # learning rate
     beta1::Float64  # first moment decay
     beta2::Float64  # second moment decay

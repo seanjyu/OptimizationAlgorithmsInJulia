@@ -1,15 +1,24 @@
-abstract type AdaptiveMethod end
+"""
+Interface type for Adaptive Stochastic methods
+    Type: 
+        AdaptiveStochasticMethod
+        
+    Function(s):
+        initState
+        stepUpdate - Method interface to perform adaptive step update based on specific adaptive stochastic method
+"""
+abstract type AdaptiveStochasticMethod end
 
 abstract type state end
 
-function initState(adaptiveMethod::AdaptiveMethod, x0)
+function initState(AdaptiveStochasticMethod::AdaptiveStochasticMethod, x0)
 end
 
-function stepUpdate(adaptiveMethod::AdaptiveMethod, gradEstimator::GradientEstimator, f, xCur, fCur, gradCur, state, iter)
+function stepUpdate(AdaptiveStochasticMethod::AdaptiveStochasticMethod, gradEstimator::GradientEstimator, f, xCur, fCur, gradCur, state, iter)
 end
 
 
-function SGD(f, x0, gradEstimator::GradientEstimator, rule::AdaptiveMethod;
+function SGD(f, x0, gradEstimator::GradientEstimator, rule::AdaptiveStochasticMethod;
              epochs = 100,
              stepsPerEpoch = 100,
              track = true)
