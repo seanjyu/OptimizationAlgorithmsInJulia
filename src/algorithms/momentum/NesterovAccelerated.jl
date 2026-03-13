@@ -37,7 +37,7 @@ function NesterovAcceleratedGradient(f, x0, gradEstimator::GradientEstimator, cr
     end
     finalizeLogger!(logger)
     return (
-            minimum = x,
+            minimumPoint = x,
             finalValue = fCur,
             logger = logger
         )
