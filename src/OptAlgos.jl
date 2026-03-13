@@ -29,13 +29,23 @@ export MiniBatchGradientEstimator
 export ConvergenceCriteria, CheckConvergence
 
 # Logger
-export NoLogger, Logger, NoAlgorithmData, AlgorithmData, initLogger, logIter!, finalizeLogger!, setConvergenceReason!
+export  NoLogger, 
+        Logger, 
+        NoAlgorithmData, 
+        AlgorithmData, 
+        initLogger, 
+        logIter!, 
+        finalizeLogger!, 
+        setConvergenceReason!
 
 # Test Functions
-export  UnivariateQuadraticFunction, discriminant, roots,
+export  UnivariateQuadraticFunction, 
+        discriminant, 
+        roots,
         MultivariateQuadraticFunction, eigenvalues, 
         # Shared methods
-        trueGradient, trueMinimum
+        trueGradient, 
+        trueMinimum
         
 # Unconstrained Optimization Wrapper
 export UnconstrainedOptMethod, solveUnconstrainedOpt
@@ -48,28 +58,63 @@ export  Model, initModel,
 export LossFunction, computeLoss, modelLossFunction, MSE
 
 # Constraint Functions
-export Constraint, project, isFeasible, violation, gradient, BoxConstraint, CompositeConstraint, ProjectionAlgorithm, LinearEqualityConstraint, LinearInequalityConstraint
+export  Constraint, 
+        project, 
+        isFeasible, 
+        violation, 
+        gradient,
+        residual,
+        constraintDimension, 
+        BoxConstraint, 
+        CompositeConstraint, 
+        ProjectionAlgorithm, 
+        LinearEqualityConstraint, 
+        LinearInequalityConstraint
 
 # -------- Algorithms --------
+# UNCONSTRAINED OPTIMIZATION
 export GradientDescent
 
-# Step length methods
+# Step Length Methods
 export calculateStepLength, Backtracking, QuadraticInterpolation, StepLengthStrategy
 
-# Line search methods
+# Line Search Methods
 export LineSearchMethod, stepSearch, lineSearch, ArmijoLineSearch, ArmijoGoldsteinLineSearch, WolfeLineSearch, MoreThuenteLineSearch
 
-# Newton/Quasi Newton methods
+# Newton/Quasi Newton Methods
 export NewtonMethod, QuasiNewtonMethod, QuasiNewtonOpt, BFGSH, BFGSB, SR1Module, SR1H, SR1B, DFPH, DFPB, updateApproximation, LBFGS
 
 # Conjugate Gradient and Nonlinear Conjugate Gradient Methods
 export NonlinearCGMethod, NonlinearCGOpt, DaiYuan, FletcherReeves, HestenesStiefel, PolakRibiere
 
-#
-export ProjectedGradientDescent, Dykstra, POCS
+# Adaptive Stochastic Methods
+export  AdaptiveStochasticMethod,
+        SGD,
+        Adadelta,
+        Adagrad,
+        Adam,
+        BasicSGD,
+        RMSprop
+
+
+# CONSTRAINED OPTIMIZATION
 
 # Unconstrained Optimization Wrappers
 export solveUnconstrainedOpt, UOWNewtonOpt, UOWQuasiNewtonOpt 
+
+# Projection Methods
+export ProjectedGradientDescent, Dykstra, POCS
+
+# Penalty Methods
+export penaltyValue, PenaltyBase, L1Penalty, QuadraticPenalty
+
+# Barrier Methods
+export BarrierMethod, checkAllInequalityConstraints, BarrierOpt, InverseBarrier, logBarrier
+
+# Lagrangian Methods
+export  DualAscent, 
+        buildSubproblem, updateDual, updatePenalty, AugmentedLagrangianMethod, AugmentedLagrangianOpt, BasicAugmentedLagrangianMethod, LogBarrierALM, solveXSubproblem, solveZSubproblem, primalResidual, dualResidual, ADMMVariant, 
+        ADMMOpt, BasicADMM, ProximalADMM, LinearizedADMM
 
 # ============================= 
 # Include files 
@@ -156,15 +201,36 @@ include("algorithms/adaptiveStochastic/Adagrad.jl")
 include("algorithms/adaptiveStochastic/Adam.jl")
 include("algorithms/adaptiveStochastic/RMSprop.jl")
 
+# ======== Unconstrained Optimization Wrappers ========
+include("utils/UnconstrainedOptWrapper/UnconstrainedOptSolverInterface.jl")
+include("utils/UnconstrainedOptWrapper/NewtonOptSolver.jl")
+include("utils/UnconstrainedOptWrapper/QuasiNewtonOptSolver.jl")
+
+
 # Projected Gradient Descent
 include("algorithms/projection/ProjectedGradientDescent.jl")
 include("algorithms/projection/Dykstras.jl")
 include("algorithms/projection/POCS.jl")
 
-# ======== Unconstrained Optimization Wrappers ========
-include("utils/UnconstrainedOptWrapper/UnconstrainedOptSolverInterface.jl")
-include("utils/UnconstrainedOptWrapper/NewtonOptSolver.jl")
-include("utils/UnconstrainedOptWrapper/QuasiNewtonOptSolver.jl")
+# Penalty Methods
+include("algorithms/penalty/PenaltyBase.jl")
+include("algorithms/penalty/L1Penalty.jl")
+include("algorithms/penalty/QuadraticPenalty.jl")
+
+# Barrier methods
+include("algorithms/barrier/BarrierBase.jl")
+include("algorithms/barrier/InverseBarrier.jl")
+include("algorithms/barrier/logBarrier.jl")
+
+# Lagrangian Methods
+include("algorithms/lagrangian/DualAscent.jl")
+include("algorithms/lagrangian/AugmentedLagrangeBase.jl")
+include("algorithms/lagrangian/logBarrierALM.jl")
+include("algorithms/lagrangian/ADMM.jl")
+include("algorithms/lagrangian/BasicADMM.jl")
+include("algorithms/lagrangian/LinearizedADMM.jl")
+include("algorithms/lagrangian/ProximalADMM.jl")
+
 
 
 end
