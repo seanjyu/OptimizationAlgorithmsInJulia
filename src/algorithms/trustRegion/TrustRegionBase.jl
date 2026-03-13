@@ -10,8 +10,21 @@ module TrustRegionBaseModule
     using ..GradientEstimatorInterface: GradientEstimator, gradient, hessian
     using ..QuasiNewtonInterface: QuasiNewtonMethod, updateApproximation
     using LinearAlgebra
-
-    function TrustRegionOpt(f, x0, gradEstimator::GradientEstimator, trustRegionMethod::TrustRegionMethod, quasiNewtonMethod::QuasiNewtonMethod; initialRadius = 1.0, beta = 1, maxTRstep = 10., eta = 0.1, tol = 1e-5, boundaryTol = 1e-7, lim = 100, printIter = false)
+    
+    function TrustRegionOpt(f, 
+                            x0, 
+                            gradEstimator::GradientEstimator, 
+                            trustRegionMethod::TrustRegionMethod, 
+                            quasiNewtonMethod::QuasiNewtonMethod, 
+                            criteria::ConvergenceCriteria; 
+                            initialRadius = 1.0, 
+                            beta = 1, 
+                            maxTRstep = 10., 
+                            eta = 0.1, 
+                            tol = 1e-5, 
+                            boundaryTol = 1e-7, 
+                            lim = 100, 
+                            printIter = false)
         x = x0
         path = [copy(x0)]
         gradients = []
@@ -24,6 +37,7 @@ module TrustRegionBaseModule
         r = initialRadius
         
         for i in 1:lim
+            # TODO replace with criteria
             if norm(grad) < tol
                 if printIter
                     println("Trust Region method converged in $i iterations. Final gradient norm: $(norm(grad))")

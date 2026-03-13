@@ -37,10 +37,8 @@ Inputs
     nonlinearCGMethod (NonlinearCGMethod) - NonlinearCGMethod struct implementing QuasiNewtonInterface with a specific nonlinear conjugate gradient method
     lineSearchMethod (LineSearchMethod)- LineSearchMethod struct impementing lineSearchInterface with a specific step length algorithm 
     alpha (Float64) - Initial step length
-    tol (Float64) - Stop criteria, if norm grad smaller than tolerance value iterations will stop
     lim (Int) - Maximum number of iterations
     lineSearchLim (Int) - Limit of number of line searching iterations 
-    printIter (Bool) - Print number of iterations after Quasi-Newton method converges
     
 Output - named tuple with the following fields
     minimum (Vector) - Final coordinate 
@@ -51,7 +49,15 @@ Output - named tuple with the following fields
     iterations (Int) - Bumber of iterations 
 """
 
-function NonlinearCGOpt(f, x0, gradEstimator::GradientEstimator, nonlinearCGMethod::NonlinearCGMethod, lineSearchMethod::LineSearchMethod,  criteria::ConvergenceCriteria; alpha = 1, tol = 1e-5, lim = 100, lineSearchLim = 100, printIter = false, track = true)
+function NonlinearCGOpt(f, 
+                        x0, gradEstimator::GradientEstimator, 
+                        nonlinearCGMethod::NonlinearCGMethod, 
+                        lineSearchMethod::LineSearchMethod,  
+                        criteria::ConvergenceCriteria; 
+                        alpha = 1, 
+                        lim = 100, 
+                        lineSearchLim = 100, 
+                        track = true)
     
     x = copy(x0)
     
