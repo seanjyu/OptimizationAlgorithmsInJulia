@@ -13,11 +13,9 @@ struct LinearEqualityConstraint <: Constraint
 end
 
 function project(parameters::LinearEqualityConstraint, x)
-    a = parameters.a
-    b = parameters.b
-    residual = dot(a, x) - b
+    r = residual(parameters, x)[1]
     norm_sq = dot(a, a)
-    return x - (residual / norm_sq) * a
+    return x - (r / norm_sq) * a
 end
 
 function isFeasible(parameters::LinearEqualityConstraint, x)
@@ -30,6 +28,14 @@ end
 
 function gradient(parameters::LinearEqualityConstraint, x)
     return parameters.a
+end
+
+function constraintDimension(c::LinearEqualityConstraint)
+    return 1
+end
+
+function residual(c::LinearEqualityConstraint, x)
+    return [dot(c.a, x) - c.b]
 end
 
 
@@ -71,14 +77,15 @@ struct MultipleLinearEqualityConstraint <: Constraint
 end
 
 function project(parameters::MultipleLinearEqualityConstraint, x)
-    residual = parameters.A * x - parameters.b
-    lambda = (parameters.A * parameters.A') \ residual
+    # residual = parameters.A * x - parameters.b
+    r = residual(parameters, x)
+    lambda = (parameters.A * parameters.A') \ r
     return x - parameters.A' * lambda
 end
 
 function isFeasible(parameters::MultipleLinearEqualityConstraint, x)
-    residuals = parameters.A * x - parameters.b
-    return all(abs.(residuals) .< parameters.tol)
+    r = residual(parameters, x)
+    return all(abs.(r) .< parameters.tol)
 end
 
 function violation(parameters::MultipleLinearEqualityConstraint, x)
@@ -106,4 +113,11 @@ end
 function isInequality(constraints::MultipleLinearEqualityConstraint)
     return false
 end
-# end
+
+function residual(constraints::MultipleLinearEqualityConstraint, x)
+    return constraints.A * x - constraints.b
+end
+
+function constraintDimension(constraints::MultipleLinearEqualityConstraint)
+    return size(constraints.A, 1)
+end

@@ -62,4 +62,11 @@
     function isInequality(constraint::Constraint)
         error("isInequality is not implemented for $(typeof(constraint))")
     end
-    
+
+    """
+    constraintDimension
+        Function that returns dimension of constraint
+    """
+    function constraintDimension(constraint::Constraint)
+        error("constraintDimension is not implemented for $(typeof(constraint))")
+    end

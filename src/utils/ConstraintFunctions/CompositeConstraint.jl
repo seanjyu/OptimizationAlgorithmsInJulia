@@ -41,3 +41,7 @@ end
 function jacobian(composite::CompositeConstraint, x)
     return vcat([jacobian(c, x) for c in composite.constraints]...)
 end
+
+function constraintDimension(composite::CompositeConstraint)
+    return sum(constraintDimension(c) for c in composite.constraints)
+end
