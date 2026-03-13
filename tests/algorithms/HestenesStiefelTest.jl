@@ -1,30 +1,9 @@
 using Test
-# include("../../utils/GradientEstimators/GradientEstimatorType.jl")
-# include("../../utils/GradientEstimators/ForwardDifference.jl")
-# include("../../utils/TestFunctions.jl") 
-# using .UnivariateForwardDifferenceModule, .MultivariateForwardDifferenceModule
-# using .UnivariateQuadraticFunctionModule, .MultivariateQuadraticFunctionModule
-# include("../../algorithms/lineSearch/lineSearchBase.jl")
-# include("../../algorithms/lineSearch/WolfeLineSearch.jl")
-# include("../../algorithms/ConjugateGradient/NonlinearCGBase.jl")
-# include("../../algorithms/ConjugateGradient/HestenesStiefel.jl")
-# using .lineSearchInterface
-# using .lineSearchBaseModule
-# using .WolfeLineSearchModule
-# using .NonlinearCGInterface
-# using .NonlinearCGBaseModule
-# using .HestenesStiefelModule
-# using LinearAlgebra
-
-
-# include("../../utils/GradientEstimators/JuliaAutoDiff.jl")
-# using .JuliaAutoDiffModule
-
 
 """
-Fletcher Reeves test
+Hestenes Stiefel Test
 """
-
+#TODO 
 # No need to test for univariate function
 
 # test for multivariate function
@@ -46,7 +25,7 @@ Fletcher Reeves test
         @test isapprox(result.functionValues[end], 2.0, atol=1e-4) # test for minimum point y coordinate
     end
 
-    # # 3D
+    # 3D
     A3 = [2.0 0.0 0.0; 0.0 2.0 0.0; 0.0 0.0 2.0]
     f3 = MultivariateQuadraticFunction(A3)
     result3 = NonlinearCGMethod(f3, [1.0, 1.0, 1.0], GradientEstimator, hestenesStiefel, wolfeBTLineSearch,alpha = 0.5, lim = 1000, lineSearchLim = 5000, tol = 1e-5, printIter = true)

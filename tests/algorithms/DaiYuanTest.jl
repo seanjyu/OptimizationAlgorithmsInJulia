@@ -21,7 +21,7 @@ Dai Yuan Nonlinear Conjugate Gradient test
     daiYuan = DaiYuan()
     println("cond number: $(cond(A))")
     for x0 in [[-1.0, 0.0], [-1.0, 2.0], [0.0, -1.0], [1.0, 1.0], [1.0, 5.0]]
-        result = NonlinearCGOpt(f, x0, GradientEstimator, daiYuan, wolfeLineSearch, c, alpha = 2, lim = 1000, lineSearchLim =70, tol = 1e-5, printIter = true)
+        result = NonlinearCGOpt(f, x0, GradientEstimator, daiYuan, wolfeLineSearch, c, alpha = 2, lim = 1000, lineSearchLim =70)
         @test isapprox(result.minimum, [0, 0], atol=1e-4) # test for minimum point x coordinate
         @test isapprox(result.finalValue, 2.0, atol=1e-4) # test for minimum point y coordinate
     end
@@ -29,7 +29,7 @@ Dai Yuan Nonlinear Conjugate Gradient test
     # # 3D
     A3 = [2.0 0.0 0.0; 0.0 2.0 0.0; 0.0 0.0 2.0]
     f3 = MultivariateQuadraticFunction(A3)
-    result3 = NonlinearCGOpt(f3, [1.0, 1.0, 1.0], GradientEstimator, daiYuan, wolfeLineSearch, c, alpha = 2, lim = 1000, lineSearchLim = 70, tol = 1e-5, printIter = true)
+    result3 = NonlinearCGOpt(f3, [1.0, 1.0, 1.0], GradientEstimator, daiYuan, wolfeLineSearch, c, alpha = 2, lim = 1000, lineSearchLim = 70)
     @test isapprox(result3.minimum, [0.0, 0.0, 0.0], atol=1e-3) # test for minimum point y coordinate
 end;
 

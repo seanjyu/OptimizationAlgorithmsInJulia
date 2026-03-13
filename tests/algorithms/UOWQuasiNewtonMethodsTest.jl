@@ -42,7 +42,7 @@ Unconstrained Optimization Wrapper Quasi-Newton Test
     
     for x0 in [[-1.0, 0.0], [-1.0, 2.0], [0.0, -1.0], [1.0, 1.0], [1.0, 5.0]]
         result = solveUnconstrainedOpt(f, x0, p)
-        @test isapprox(result.minimum, [0, 0], atol=1e-4) # test for minimum point x coordinate
+        @test isapprox(result.minimumPoint, [0, 0], atol=1e-4) # test for minimum point x coordinate
         @test isapprox(result.finalValue, 2.0, atol=1e-4) # test for minimum point y coordinate
     end
 
@@ -50,6 +50,6 @@ Unconstrained Optimization Wrapper Quasi-Newton Test
     A3 = [2.0 0.0 0.0; 0.0 2.0 0.0; 0.0 0.0 2.0]
     f3 = MultivariateQuadraticFunction(A3)
     result3 = solveUnconstrainedOpt(f3, [1.0, 1.0, 1.0], p)
-    @test isapprox(result3.minimum, [0.0, 0.0, 0.0], atol=1e-3) # test for minimum point y coordinate
+    @test isapprox(result3.minimumPoint, [0.0, 0.0, 0.0], atol=1e-3) # test for minimum point y coordinate
 end;
 
