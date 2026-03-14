@@ -1,3 +1,24 @@
+"""
+Dual Ascent
+
+Implementation of Dual Ascent.
+
+Inputs
+    f (function) - Objective function
+    x0 (vector) - Starting coordinate
+    unconstrainedOptSolver (UnconstrainedOptMethod) - Unconstrained Optimization Wrapper 
+    constraints (Constraint) - Constraint object (note if have multiple constraints need to aggregate them into single object)
+    criteria - Criteria object
+    alpha (float) - Step size for dual ascent 
+        lim (integer) - Maximum number of dual ascent iterations
+        track (boolean) - Boolean to check whether or not to log variables.
+
+Logged Variables
+    On top of the basic variables (see logger docs for full variables) the following will be logged if track flag is set to true
+            Dual Norm (float) - Norm of dual
+            Primal Residual (float) - Norm of primal residual
+"""
+
 function DualAscent(f, x0, unconstrainedOptSolver::UnconstrainedOptMethod,
                     constraints::Constraint, criteria::ConvergenceCriteria;
                     alpha=0.1, lim=100, track=false)
