@@ -2,6 +2,23 @@
 
 """
 Logger for optimization algorithms
+
+If the logger flag is activated the following variables are tracked. I.e. if the specific algorithm does not use the variable it will stay at its default value.
+    *Iteration Values*
+    path (vector) - Coordinates taken by the algorithm 
+    gradient (vector) - 
+    function values (vector) - 
+    stepLength (vector) - 
+
+    *Counters*
+    iterations (integer) - 
+    functionEvals (integer) - 
+    gradEstFunctionEvals (integer) - 
+    gradientEvals (integer) - 
+
+    *misc*
+    convergenceReason (text) - 
+    algorithmData (struct) - 
 """
 
 # Abstract type for algorithm-specific data
