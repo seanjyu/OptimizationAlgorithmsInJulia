@@ -1,3 +1,8 @@
+"""
+Dykstra's Projection Algorithm
+
+
+"""
 struct Dykstra <: ProjectionAlgorithm end
 
 function project(composite::CompositeConstraint{Dykstra}, x)

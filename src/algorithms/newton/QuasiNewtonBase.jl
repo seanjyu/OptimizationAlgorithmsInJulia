@@ -38,7 +38,7 @@ QuasiNewtonOpt
 Reference(s)
     This implementation generally follows algorithm 3.2 (pg 48) from Nocedal and Wright's 'Numerical Optimization' (2nd Ed).     
 
-Input:
+Input
     f (function) - Objective function 
     x0 (Vector) - Starting coordinate 
     gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details
@@ -52,11 +52,14 @@ Input:
 
 Output - named tuple with the following fields
     minimum (Vector) - Final coordinate 
-    path (Array) - Coordinates at each iteration 
-    gradients (Array) - Gradient values at each iteration
-    hessians (Array) - Hessian values at each iteration
-    functionValues (Array) - Objective function values at each iteration
-    iterations (Int) - Bumber of iterations 
+    finalValue (float) - Final objective function value
+    logger (struct) - if track flag activated then the following fields can be accessed
+        path (Array) - Coordinates at each iteration 
+        gradients (Array) - Gradient values at each iteration
+        functionValues (Array) - Objective function values at each iteration
+        iterations (Int) - Bumber of iterations 
+        algorithmData (Struct) - Algorithm specific data
+            hessians (Array) - Hessian values at each iteration
 """
 function QuasiNewtonOpt(f, x0, gradEstimator::GradientEstimator, quasiNewtonMethod::QuasiNewtonMethod, lineSearchMethod::LineSearchMethod, criteria::ConvergenceCriteria; alpha = 1, beta = 1, lim = 100, lineSearchLim = 100, printIter = false, track = true)
     

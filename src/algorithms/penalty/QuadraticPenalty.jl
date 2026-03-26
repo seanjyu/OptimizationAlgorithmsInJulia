@@ -1,3 +1,6 @@
+"""
+Quadratic Penalty Method
+"""
 struct QuadraticPenalty <: PenaltyMethod end
 
 function penaltyValue(::QuadraticPenalty, violation::Real)

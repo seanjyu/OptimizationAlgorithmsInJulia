@@ -1,3 +1,8 @@
+"""
+Penalty Methods Base
+
+"""
+
 abstract type PenaltyMethod end
 
 function penaltyValue(parameters::PenaltyMethod, violations)

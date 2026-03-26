@@ -41,6 +41,27 @@ function stepSearch(lineSearchMethod::LineSearchMethod,
 end
 
 
+"""
+lineSearch
+    Implementation of generic line search
+
+Input:
+    f (function) - Objective function 
+    x0 (vector) - Starting coordinate 
+    gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details
+    lineSearchMethod (LineSearchMethod) - LineSearchMethod struct impementing lineSearchInterface with a specific step length algorithm
+    criteria (ConvergenceCriteria) -  
+    alpha (Float64) - Initial step length
+    tol (Float64) - Stop criteria, if norm grad smaller than tolerance value iterations will stop
+    lim (Int) - Maximum number of iterations
+
+Output - named tuple with the following fields
+    minimumPoint (Vector)- Final coordinate 
+    path (Array) - Coordinates at each iteration 
+    gradients (Array) - Gradient values at each iteration
+    functionValues (Array) - Objective function values at each iteration
+    iterations (Int) - Bumber of iterations 
+"""
 function lineSearch(f, 
                     x0, gradEstimator::GradientEstimator, 
                     lineSearchMethod::LineSearchMethod, 
@@ -50,27 +71,7 @@ function lineSearch(f,
                     lineSearchLim = 100, 
                     printIter = false, 
                     track = true)
-    """
-    lineSearch
-        Implementation of generic line search
-
-    Input:
-        f (function) - Objective function 
-        x0 (vector) - Starting coordinate 
-        gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details
-        lineSearchMethod (LineSearchMethod) - LineSearchMethod struct impementing lineSearchInterface with a specific step length algorithm
-        criteria (ConvergenceCriteria) -  
-        alpha (Float64) - Initial step length
-        tol (Float64) - Stop criteria, if norm grad smaller than tolerance value iterations will stop
-        lim (Int) - Maximum number of iterations
-
-    Output - named tuple with the following fields
-        minimumPoint (Vector)- Final coordinate 
-        path (Array) - Coordinates at each iteration 
-        gradients (Array) - Gradient values at each iteration
-        functionValues (Array) - Objective function values at each iteration
-        iterations (Int) - Bumber of iterations 
-    """
+    
     x = copy(x0)
     fCur = f(x0)
 

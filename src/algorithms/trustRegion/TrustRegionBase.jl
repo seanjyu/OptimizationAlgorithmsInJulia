@@ -1,15 +1,20 @@
-module TrustRegionInterface
-    export TrustRegionMethod, solveTrustRegionModel
-    abstract type TrustRegionMethod end
+"""
+Trust Region Method Base
+"""
 
-    function solveTrustRegionModel(trustRegionMethod::TrustRegionMethod, grad, B, r)
-    end
+# module TrustRegionInterface
+#    export TrustRegionMethod, solveTrustRegionModel
+abstract type TrustRegionMethod end
+
+function solveTrustRegionModel(trustRegionMethod::TrustRegionMethod, grad, B, r)
+    error("solveTrustRegionModel not implemented for $(typeof(trustRegionMethod))")
 end
+# end
 
-module TrustRegionBaseModule
-    using ..GradientEstimatorInterface: GradientEstimator, gradient, hessian
-    using ..QuasiNewtonInterface: QuasiNewtonMethod, updateApproximation
-    using LinearAlgebra
+# module TrustRegionBaseModule
+#    using ..GradientEstimatorInterface: GradientEstimator, gradient, hessian
+#    using ..QuasiNewtonInterface: QuasiNewtonMethod, updateApproximation
+#    using LinearAlgebra
     
     function TrustRegionOpt(f, 
                             x0, 
@@ -91,4 +96,4 @@ module TrustRegionBaseModule
             iterations = lim
         )
     end
-end
+

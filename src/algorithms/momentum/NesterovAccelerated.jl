@@ -1,3 +1,9 @@
+"""
+Nesterov Accelerated Gradient Descent
+
+References(s)
+"""
+
 function NesterovAcceleratedGradient(f, x0, gradEstimator::GradientEstimator, criteria::ConvergenceCriteria; alpha=0.1, beta = 0.8, tol=1e-5, lim=100, track = true)
 
     x = copy(x0)

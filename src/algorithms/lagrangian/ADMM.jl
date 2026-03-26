@@ -22,11 +22,41 @@ function primalResidual(A, B, c, x, z)
 end
 
 """
-Compute dual residual: ρAᵀB(zNew - zOld)
+Compute dual residual: rho * A^T * B * (zNew - zOld)
+
 """
 function dualResidual(A, B, rho, zNew, zOld)
     return rho * A' * B * (zNew - zOld)
 end
+
+"""
+Alternate Direction Method of Multipliers (ADMM)
+
+Reference(s)
+    REFERENCES
+
+Required Inputs     
+    f (function) - Objective function 
+    b (function) - 
+    x0 (vector) - Starting coordinate 
+    gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details    
+    criteria (Criteria) - 
+
+Optional Inputs
+    lim (Int) - Maximum number of iterations
+    track (boolean) - Flag to track variables from each iteration 
+
+Output - named tuple with the following fields
+    minimumPoint (Vector) - Final coordinate of algorithm 
+    finalValue (Float64) - Objective function evaluation at final coordinate 
+    logger (struct) - if track flag set to true then the following fields can be accessed
+        path (Array) - Coordinates at each iteration 
+        gradients (Array) - Gradient values at each iteration
+        functionValues (Array) - Objective function values at each iteration
+        iterations (Int) - Number of iterations 
+        algorithmData (Struct) - Algorithm specific data
+            SOMEFIELD - FIELDDESCR
+"""
 
 function ADMMOpt(f, g, x0, z0, A::Matrix, B::Matrix, c::Vector,
                  variant::ADMMVariant, criteria::ConvergenceCriteria;

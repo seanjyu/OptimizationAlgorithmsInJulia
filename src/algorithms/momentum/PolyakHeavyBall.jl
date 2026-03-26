@@ -1,4 +1,29 @@
+"""
+Polyak Heavy Ball Method
 
+Reference(s)
+
+Required Inputs     
+    f (function) - Objective function 
+    x0 (vector) - Starting coordinate 
+    gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details    
+    criteria (Criteria) - 
+
+Optional Inputs
+    lim (Int) - Maximum number of iterations
+    track (boolean) - 
+
+Output - named tuple with the following fields
+    minimumPoint (Vector) - Final coordinate of algorithm 
+    finalValue (Float64) - Objective function evaluation at final coordinate 
+    logger (struct) - if track flag set to true then the following fields can be accessed
+        path (Array) - Coordinates at each iteration 
+        gradients (Array) - Gradient values at each iteration
+        functionValues (Array) - Objective function values at each iteration
+        iterations (Int) - Bumber of iterations 
+        algorithmData (Struct) - Algorithm specific data 
+            Momentums - Momentum values at each iteration
+"""
 function PolyakHeavyBall(f, x0, gradEstimator::GradientEstimator, criteria::ConvergenceCriteria; alpha=0.1, beta = 0.8, tol=1e-5, lim=100, track = true)
 
     x = copy(x0)

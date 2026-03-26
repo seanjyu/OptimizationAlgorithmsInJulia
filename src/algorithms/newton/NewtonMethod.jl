@@ -6,11 +6,11 @@ Reference(s)
     This implementation generally follows algorithm 3.2 (pg 48) from Nocedal and Wright's 'Numerical Optimization' (2nd Ed). 
     The algorithm in the book includes a line search for the given Newton direction but it is not implemented here.    
 
-Input:
+Input
     f (function) - Objective function 
     x0 (vector) - Starting coordinate 
-    gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details
-    
+    gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details    
+    criteria (Criteria) - 
     lim (Int) - Maximum number of iterations
     track (boolean) - 
 
@@ -21,6 +21,7 @@ Output - named tuple with the following fields
     hessians (Array) - Hessian values at each iteration
     functionValues (Array) - Objective function values at each iteration
     iterations (Int) - Bumber of iterations 
+
 """
 function NewtonMethod(f, 
                       x0, 

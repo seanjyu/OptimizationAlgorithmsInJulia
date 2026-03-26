@@ -18,6 +18,33 @@ function stepUpdate(AdaptiveStochasticMethod::AdaptiveStochasticMethod, gradEsti
 end
 
 
+
+"""
+SGD
+
+Required Inputs     
+    f (function) - Objective function 
+    x0 (vector) - Starting coordinate 
+    gradEstimator (GradientEstimator) - Gradient estimator struct, see utils/GradientEstimatorInterface for more details    
+    criteria (Criteria) - 
+
+Optional Inputs
+    lim (Int) - Maximum number of iterations
+    track (boolean) - Flag whether or not to track variables from iteration 
+
+Output - named tuple with the following fields
+    minimumPoint (Vector) - Final coordinate of algorithm 
+    finalValue (Float64) - Objective function evaluation at final coordinate 
+    logger (struct) - if track flag set to true then the following fields can be accessed
+        path (Array) - Coordinates at each iteration 
+        gradients (Array) - Gradient values at each iteration
+        functionValues (Array) - Objective function values at each iteration
+        iterations (Int) - Number of iterations 
+        algorithmData (Struct) - Algorithm specific data
+            SOMEFIELD - FIELDDESCR
+
+"""
+
 function SGD(f, x0, gradEstimator::GradientEstimator, rule::AdaptiveStochasticMethod;
              epochs = 100,
              stepsPerEpoch = 100,
